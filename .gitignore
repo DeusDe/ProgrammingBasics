@@ -1,0 +1,11 @@
+# CLion / CMake Build-Ordner
+cmake-build-debug/
+cmake-build-release/
+build/
+
+# Kompilierte Binaries
+main
+*.out
+
+# IDE Einstellungen
+.idea/
