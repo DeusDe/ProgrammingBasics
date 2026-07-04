@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../src.h"
+#include "main.h"
 
 
 int main(void) {
