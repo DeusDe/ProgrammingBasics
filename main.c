@@ -5,23 +5,24 @@
 #define CONST_ALPHA_LEN 26
 
 
-char* caeser_encrypt(char* str_base, int i_shift) {
+char* caeser_encrypt(const char* str_base, int i_shift) {
     int i_base_len = strlen(str_base);
     char *str_encryted = malloc(sizeof(char) * (i_base_len + 1));
-    char char_buffer;
+    int char_buffer;
 
-    //Leerer String oder Leerer shift wird direkt returned
-    if (str_encryted == NULL || i_shift == 0) {
-        return str_base;
+    //Leeren String returnen wenn kein String angegeben wurde
+    if (str_encryted == NULL) {
+        return nullptr;
+    }
+
+    //String Kopieren wenn der shift 0 ist
+    if (i_shift == 0) {
+        strcpy(str_encryted, str_base);
+        return str_encryted;
     }
 
     //Shift anpassen falls größer als Alphabet
-    while (i_shift <= -CONST_ALPHA_LEN) {
-        i_shift += CONST_ALPHA_LEN;
-    }
-    while (i_shift >= CONST_ALPHA_LEN) {
-        i_shift -= CONST_ALPHA_LEN;
-    }
+    i_shift = i_shift % CONST_ALPHA_LEN;
 
     //Haupt verschlüsselungsloop
     for (int int_index = 0; int_index < i_base_len; int_index++) {
@@ -47,7 +48,7 @@ char* caeser_encrypt(char* str_base, int i_shift) {
         }
 
         //Setzen des finalen Buchstaben
-        str_encryted[int_index] = char_buffer;
+        str_encryted[int_index] = (char)char_buffer;
     }
 
     //Setzen des Stringendes
@@ -61,8 +62,11 @@ int main(void) {
 
     str_base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n";
 
-    str_encryted = caeser_encrypt(str_base,27);
+    str_encryted = caeser_encrypt(str_base,1);
 
-    printf(str_encryted);
+    printf("%s\n", str_encryted);
+
+    free(str_encryted);
+
     return 0;
 }
