@@ -32,11 +32,11 @@ typedef struct linked_list_int_manager {
 static linked_list_int *linked_list_int_create_segment(int number);
 static linked_list_int *linked_list_int_get_segment(linked_list_int *ll_current, int number);
 static void linked_list_int_prt(linked_list_int *ll_current);
-static int linked_list_count(linked_list_int *ll_current);
-static linked_list_int *linked_list_int_add_segment(linked_list_int *ll_current, int number);
-static linked_list_int *linked_list_int_add_segment_lower(linked_list_int *ll_current, int number);
-static linked_list_int *linked_list_int_add_segment_higher(linked_list_int *ll_current, int number);
-static linked_list_int *linked_list_int_remove_segement_start(linked_list_int *ll_current, int number);
+[[maybe_unused]] static int linked_list_count(linked_list_int *ll_current);
+[[maybe_unused]] static linked_list_int *linked_list_int_add_segment(linked_list_int *ll_current, int number);
+[[maybe_unused]] static linked_list_int *linked_list_int_add_segment_lower(linked_list_int *ll_current, int number);
+[[maybe_unused]] static linked_list_int *linked_list_int_add_segment_higher(linked_list_int *ll_current, int number);
+[[maybe_unused]] static linked_list_int *linked_list_int_remove_segment_start(linked_list_int *ll_current, int number);
 static void linked_list_int_remove_segment(linked_list_int *ll_previous, linked_list_int *ll_current, int number);
 static void linked_list_int_free_segment(linked_list_int *ll_current);
 static void linked_list_int_free(linked_list_int *ll_current);
@@ -44,13 +44,13 @@ static void linked_list_int_free_iterative(linked_list_int *ll_current);
 
 // Manager-Funktionen
 static linked_list_int_manager* linked_list_int_manager_create();
-static linked_list_int *linked_list_int_manager_get_segment(linked_list_int_manager *llm_current, int number);
-static void linked_list_int_manager_prt(linked_list_int_manager *llm_current);
+[[maybe_unused]] static linked_list_int *linked_list_int_manager_get_segment(const linked_list_int_manager *llm_current, int number);
+static void linked_list_int_manager_prt(const linked_list_int_manager *llm_current);
 static void linked_list_int_manager_add_segment(linked_list_int_manager *llm_current, int number);
 static void linked_list_int_manager_add_segment_lower(linked_list_int_manager *llm_current, int number);
 static void linked_list_int_manager_add_segment_higher(linked_list_int_manager *llm_current, int number);
 static void linked_list_int_manager_remove_segment(linked_list_int_manager *llm_current, int number);
-static void linked_list_int_manager_free(linked_list_int_manager *llm_current);
+[[maybe_unused]] static void linked_list_int_manager_free(linked_list_int_manager *llm_current);
 static void linked_list_int_manager_free_iterative(linked_list_int_manager *llm_current);
 
 // Class-Wrapper
@@ -90,7 +90,7 @@ static linked_list_int *linked_list_int_create_segment(int number) {
  *
  * @param ll_current Pointer auf den Startknoten.
  * @param number Die gesuchte Zahl.
- * @return Pointer auf den gefundenen Knoten, oder nullptr wenn nicht gefunden.
+ * @return Pointer auf den gefundenen Knoten, oder nullptr, wenn nicht gefunden.
  */
 static linked_list_int *linked_list_int_get_segment(linked_list_int *ll_current, int number) {
     if (ll_current == nullptr) {
@@ -234,7 +234,7 @@ static linked_list_int *linked_list_int_add_segment_higher(linked_list_int *ll_c
  * @param number Die zu löschende Zahl.
  * @return Pointer auf den (möglicherweise neuen) Startknoten.
  */
-static linked_list_int *linked_list_int_remove_segement_start(linked_list_int *ll_current, int number) {
+static linked_list_int *linked_list_int_remove_segment_start(linked_list_int *ll_current, int number) {
     if (ll_current == nullptr) {
         return nullptr;
     }
@@ -338,9 +338,9 @@ static linked_list_int_manager* linked_list_int_manager_create() {
  *
  * @param llm_current Pointer auf den Listen-Manager.
  * @param number Die gesuchte Zahl.
- * @return Pointer auf den Knoten, oder nullptr wenn nicht gefunden.
+ * @return Pointer auf den Knoten, oder nullptr, wenn nicht gefunden.
  */
-static linked_list_int *linked_list_int_manager_get_segment(linked_list_int_manager *llm_current, int number) {
+static linked_list_int *linked_list_int_manager_get_segment(const linked_list_int_manager *llm_current, int number) {
     if (llm_current == nullptr) return nullptr;
     return linked_list_int_get_segment(llm_current->head, number);
 }
@@ -350,7 +350,7 @@ static linked_list_int *linked_list_int_manager_get_segment(linked_list_int_mana
  *
  * @param llm_current Pointer auf den Listen-Manager.
  */
-static void linked_list_int_manager_prt(linked_list_int_manager *llm_current) {
+static void linked_list_int_manager_prt(const linked_list_int_manager *llm_current) {
     if (llm_current == nullptr) return;
     linked_list_int_prt(llm_current->head);
 }
