@@ -177,6 +177,17 @@ void linked_list_int_free(linked_list_int* ll_current) {
     linked_list_int_free_segment(ll_current);
 }
 
+void linked_list_int_free_iterative(linked_list_int* ll_current) {
+    linked_list_int* ll_index = ll_current;
+    linked_list_int* ll_next;
+
+    while (ll_index != nullptr) {
+        ll_next = ll_index->next;
+        linked_list_int_free(ll_index);
+        ll_index = ll_next;
+    }
+}
+
 int linked_list_count(linked_list_int* ll_current) {
     linked_list_int* ll_index = ll_current;
     int count = 0;
@@ -202,4 +213,26 @@ void linked_list_int_prt(linked_list_int* ll_current) {
         ll_index = ll_index->next;
         int_index++;
     }
+}
+
+void linked_list_int_manager_add_segment(linked_list_manager* llm_current, int number) {
+    //Wenn die liste noch leer ist
+    if (llm_current->head == nullptr) {
+        llm_current->head = llm_current->tail = linked_list_int_create_segment(number);
+        llm_current->int_count = 1;
+        return;
+    }
+
+    //Am Ende hinzufügen
+    llm_current->tail->next = linked_list_int_create_segment(number);
+    llm_current->tail = llm_current->tail->next;
+    llm_current->int_count++;
+}
+
+linked_list_manager* linked_list_int_manager_add_segment_lower(linked_list_manager* llm_current, int number) {
+
+}
+
+linked_list_manager* linked_list_int_manager_add_higher(linked_list_manager* llm_current, int number) {
+
 }
